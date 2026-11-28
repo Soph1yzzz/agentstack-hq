@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>AgentStack</title>
+    <link>https://soph1yzzz.github.io/agentstack-hq/</link>
+    <description>Data-driven reviews, side-by-side comparisons, and production-ready tutorials for AI coding agents, no-code workflow automation, and high-leverage developer SaaS.</description>
+    <item>
+      <title>Production Docker Compose Stack for Autonomous AI Agents: n8n Queue Mode + PostgreSQL + Redis + Caddy (2026 Guide)</title>
+      <link>https://soph1yzzz.github.io/agentstack-hq/posts/docker-ai-agent-stack-n8n-postgres-redis-2026/</link>
+      <guid>https://soph1yzzz.github.io/agentstack-hq/posts/docker-ai-agent-stack-n8n-postgres-redis-2026/</guid>
+      <pubDate>Sat, 28 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Scale self-hosted AI agent workflows in 2026 using n8n Queue Mode with Docker Compose, PostgreSQL 16, Redis 7.2, horizontally scalable workers, and Caddy HTTPS.</description>
+      <enclosure url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/docker-ai-agent-stack-n8n-postgres-redis-2026.png" length="146283" type="image/png" />
+      <media:content url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/docker-ai-agent-stack-n8n-postgres-redis-2026.png" medium="image" type="image/png" width="1000" height="1500" />
+    </item>
+    <item>
+      <title>The Automated B2B Outbound Stack in 2026: Engineering Salesforge, Make &amp; n8n for High Deliverability (Python API Included)</title>
+      <link>https://soph1yzzz.github.io/agentstack-hq/posts/ai-cold-email-stack-salesforge-make/</link>
+      <guid>https://soph1yzzz.github.io/agentstack-hq/posts/ai-cold-email-stack-salesforge-make/</guid>
+      <pubDate>Fri, 27 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Production 2026 engineering guide to combining Salesforge, Make, and n8n for automated B2B cold email: real pricing, SPF/DKIM/DMARC deliverability, and Python webhook hygiene.</description>
+      <enclosure url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/ai-cold-email-stack-salesforge-make.png" length="146535" type="image/png" />
+      <media:content url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/ai-cold-email-stack-salesforge-make.png" medium="image" type="image/png" width="1000" height="1500" />
+    </item>
+    <item>
+      <title>ManyChat vs Make for Instagram AI DM Automation (2026): Meta Graph API Webhooks, Cost Math &amp; Python Handler</title>
+      <link>https://soph1yzzz.github.io/agentstack-hq/posts/manychat-vs-make-instagram-ai-dm/</link>
+      <guid>https://soph1yzzz.github.io/agentstack-hq/posts/manychat-vs-make-instagram-ai-dm/</guid>
+      <pubDate>Thu, 26 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Engineering and pricing comparison of ManyChat vs Make for Instagram AI DM automation in 2026: contact vs credit billing, Meta API webhooks, and a Python FastAPI bridge.</description>
+      <enclosure url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/manychat-vs-make-instagram-ai-dm.png" length="144998" type="image/png" />
+      <media:content url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/manychat-vs-make-instagram-ai-dm.png" medium="image" type="image/png" width="1000" height="1500" />
+    </item>
+    <item>
+      <title>beehiiv vs Systeme.io for Indie Developers in 2026: API, Webhooks &amp; Automated Growth Stack (Python Integration Included)</title>
+      <link>https://soph1yzzz.github.io/agentstack-hq/posts/beehiiv-vs-systeme-solopreneur-stack/</link>
+      <guid>https://soph1yzzz.github.io/agentstack-hq/posts/beehiiv-vs-systeme-solopreneur-stack/</guid>
+      <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Developer-focused 2026 comparison of beehiiv vs Systeme.io: real pricing math, Send API &amp; webhook limits, automation rules, and a Python webhook integration pattern.</description>
+      <enclosure url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/beehiiv-vs-systeme-solopreneur-stack.png" length="146715" type="image/png" />
+      <media:content url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/beehiiv-vs-systeme-solopreneur-stack.png" medium="image" type="image/png" width="1000" height="1500" />
+    </item>
+    <item>
+      <title>How to Build a 24/7 AI Voice Support Agent with ElevenLabs &amp; n8n Webhooks (2026 Step-by-Step Guide)</title>
+      <link>https://soph1yzzz.github.io/agentstack-hq/posts/build-ai-voice-agent-n8n-elevenlabs/</link>
+      <guid>https://soph1yzzz.github.io/agentstack-hq/posts/build-ai-voice-agent-n8n-elevenlabs/</guid>
+      <pubDate>Tue, 24 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Step-by-step 2026 engineering guide to building a 24/7 AI voice support agent using ElevenLabs Conversational AI and n8n webhooks—with JSON schemas, latency guardrails, and real cost math.</description>
+      <enclosure url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/build-ai-voice-agent-n8n-elevenlabs.png" length="140294" type="image/png" />
+      <media:content url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/build-ai-voice-agent-n8n-elevenlabs.png" medium="image" type="image/png" width="1000" height="1500" />
+    </item>
+    <item>
+      <title>Deploying 24/7 Python AI Agents in 2026: Railway vs Self-Hosted VPS (Docker + systemd Cost Breakdown)</title>
+      <link>https://soph1yzzz.github.io/agentstack-hq/posts/deploy-python-ai-agents-railway-vs-vps/</link>
+      <guid>https://soph1yzzz.github.io/agentstack-hq/posts/deploy-python-ai-agents-railway-vs-vps/</guid>
+      <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Real 2026 cost math and production Docker + systemd blueprints comparing Railway PaaS vs a flat-rate KVM VPS for always-on FastAPI Python AI agents and workers.</description>
+      <enclosure url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/deploy-python-ai-agents-railway-vs-vps.png" length="141000" type="image/png" />
+      <media:content url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/deploy-python-ai-agents-railway-vs-vps.png" medium="image" type="image/png" width="1000" height="1500" />
+    </item>
+    <item>
+      <title>Self-Hosting n8n with Docker, PostgreSQL &amp; Caddy on a Low-Cost VPS (2026 Production Blueprint)</title>
+      <link>https://soph1yzzz.github.io/agentstack-hq/posts/self-host-n8n-vps-complete-guide/</link>
+      <guid>https://soph1yzzz.github.io/agentstack-hq/posts/self-host-n8n-vps-complete-guide/</guid>
+      <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Production-ready 2026 guide to self-hosting n8n with Docker Compose, PostgreSQL 16, and Caddy automatic HTTPS on a low-cost KVM VPS—plus real cost math vs Railway and n8n Cloud.</description>
+      <enclosure url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/self-host-n8n-vps-complete-guide.png" length="137652" type="image/png" />
+      <media:content url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/self-host-n8n-vps-complete-guide.png" medium="image" type="image/png" width="1000" height="1500" />
+    </item>
+    <item>
+      <title>7 Best Zapier Alternatives for AI Automation in 2026 (Save Up to 80%)</title>
+      <link>https://soph1yzzz.github.io/agentstack-hq/posts/best-zapier-alternatives-ai-automation-2026/</link>
+      <guid>https://soph1yzzz.github.io/agentstack-hq/posts/best-zapier-alternatives-ai-automation-2026/</guid>
+      <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Compare the 7 best Zapier alternatives for AI automation in 2026: Make, n8n, self-hosted VPS, Activepieces, Pipedream, Systeme.io, and Railway with real cost math.</description>
+      <enclosure url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/best-zapier-alternatives-ai-automation-2026.png" length="129179" type="image/png" />
+      <media:content url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/best-zapier-alternatives-ai-automation-2026.png" medium="image" type="image/png" width="1000" height="1500" />
+    </item>
+    <item>
+      <title>n8n vs Make in 2026: Which Workflow Platform Wins for AI Agents?</title>
+      <link>https://soph1yzzz.github.io/agentstack-hq/posts/n8n-vs-make-ai-agents-2026/</link>
+      <guid>https://soph1yzzz.github.io/agentstack-hq/posts/n8n-vs-make-ai-agents-2026/</guid>
+      <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
+      <description>Data-driven 2026 comparison of n8n vs Make for AI agents 2026. Real pricing math, AI agent architecture blueprints, and clear recommendations.</description>
+      <enclosure url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/n8n-vs-make-ai-agents-2026.png" length="128362" type="image/png" />
+      <media:content url="https://soph1yzzz.github.io/agentstack-hq/assets/pins/n8n-vs-make-ai-agents-2026.png" medium="image" type="image/png" width="1000" height="1500" />
+    </item>
+  </channel>
+</rss>

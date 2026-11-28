@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Automated B2B Outbound Stack in 2026: Engineering Salesforge, Make &amp; n8n for High Deliverability (Python API Included) | AgentStack</title>
+  <meta name="description" content="Production 2026 engineering guide to combining Salesforge, Make, and n8n for automated B2B cold email: real pricing, SPF/DKIM/DMARC deliverability, and Python webhook hygiene." />
+  <meta name="google-site-verification" content="OZG-oKcAh8Z1gOLSFiWvTeQg201us2WYifoJXy2IB4g" />
+  <meta name="p:domain_verify" content="4046b44add9410f9e58d8dd613a6b487" />
+  <link rel="canonical" href="https://soph1yzzz.github.io/agentstack-hq/posts/ai-cold-email-stack-salesforge-make/" />
+  <link rel="alternate" type="application/rss+xml" title="AgentStack RSS" href="https://soph1yzzz.github.io/agentstack-hq/rss.xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="The Automated B2B Outbound Stack in 2026: Engineering Salesforge, Make &amp; n8n for High Deliverability (Python API Included) | AgentStack" />
+  <meta property="og:description" content="Production 2026 engineering guide to combining Salesforge, Make, and n8n for automated B2B cold email: real pricing, SPF/DKIM/DMARC deliverability, and Python webhook hygiene." />
+  <meta property="og:url" content="https://soph1yzzz.github.io/agentstack-hq/posts/ai-cold-email-stack-salesforge-make/" />
+  <meta property="og:image" content="https://soph1yzzz.github.io/agentstack-hq/assets/covers/ai-cold-email-stack-salesforge-make.png" />
+  <meta name="twitter:image" content="https://soph1yzzz.github.io/agentstack-hq/assets/covers/ai-cold-email-stack-salesforge-make.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+:root {
+  --bg: #0b1020;
+  --surface: #121a2e;
+  --surface-2: #18233d;
+  --text: #e6edf7;
+  --muted: #9aa8c7;
+  --accent: #38bdf8;
+  --accent-2: #34d399;
+  --border: #243252;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.72;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+header.site-header {
+  border-bottom: 1px solid var(--border);
+  background: rgba(11,16,32,0.92);
+  position: sticky; top: 0; backdrop-filter: blur(8px); z-index: 10;
+}
+.nav { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+.logo { font-weight: 800; font-size: 1.2rem; color: #fff; letter-spacing: -0.02em; }
+.logo span { color: var(--accent-2); }
+.nav-links a { margin-left: 20px; color: var(--muted); font-weight: 500; font-size: 0.95rem; }
+.nav-links a:hover { color: #fff; }
+.hero { padding: 56px 0 36px; border-bottom: 1px solid var(--border); }
+.hero h1 { font-size: 2.3rem; line-height: 1.2; margin: 0 0 12px; letter-spacing: -0.02em; }
+.hero p { color: var(--muted); font-size: 1.1rem; max-width: 680px; margin: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin: 28px 0; }
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 22px; display: flex; flex-direction: column; justify-content: space-between;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.card h3 { margin: 0 0 10px; font-size: 1.15rem; line-height: 1.35; }
+.card p { color: var(--muted); font-size: 0.95rem; margin: 0 0 14px; }
+.meta { font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
+.tag {
+  display: inline-block; font-size: 0.75rem; padding: 2px 8px; border-radius: 999px;
+  background: var(--surface-2); color: var(--accent); margin-right: 6px; border: 1px solid var(--border);
+}
+.btn {
+  display: inline-block; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #06101f !important; font-weight: 700; padding: 9px 16px; border-radius: 8px;
+  font-size: 0.9rem; text-decoration: none !important;
+}
+.btn:hover { opacity: 0.92; }
+article { padding: 36px 0 60px; }
+article h1 { font-size: 2.2rem; line-height: 1.22; margin: 10px 0 16px; }
+article h2 { margin-top: 40px; padding-bottom: 8px; border-bottom: 1px solid var(--border); font-size: 1.5rem; }
+article h3 { margin-top: 26px; font-size: 1.18rem; color: #fff; }
+.tldr-box {
+  background: var(--surface-2); border-left: 4px solid var(--accent-2);
+  padding: 16px 20px; border-radius: 8px; margin: 20px 0 28px;
+}
+.tldr-box strong { color: var(--accent-2); }
+blockquote.disclosure {
+  background: rgba(56,189,248,0.08); border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px 16px; margin: 0 0 24px; font-size: 0.88rem; color: var(--muted);
+}
+.table-wrap { overflow-x: auto; margin: 24px 0; border-radius: 10px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 0.93rem; }
+th, td { padding: 12px 14px; border-bottom: 1px solid var(--border); text-align: left; }
+th { background: var(--surface-2); color: #fff; font-weight: 700; }
+tr:last-child td { border-bottom: none; }
+pre { background: #070b15; border: 1px solid var(--border); border-radius: 10px; padding: 16px; overflow-x: auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em; }
+p code, li code { background: var(--surface-2); padding: 2px 6px; border-radius: 4px; color: var(--accent-2); }
+.aff-link { color: var(--accent-2); font-weight: 600; }
+footer.site-footer {
+  border-top: 1px solid var(--border); padding: 32px 0; color: var(--muted); font-size: 0.88rem; margin-top: 48px;
+}
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"The Automated B2B Outbound Stack in 2026: Engineering Salesforge, Make & n8n for High Deliverability (Python API Included)","description":"Production 2026 engineering guide to combining Salesforge, Make, and n8n for automated B2B cold email: real pricing, SPF/DKIM/DMARC deliverability, and Python webhook hygiene.","datePublished":"2026-11-27","author":{"@type":"Organization","name":"AgentStack Research Desk"},"publisher":{"@type":"Organization","name":"AgentStack"},"mainEntityOfPage":"https://soph1yzzz.github.io/agentstack-hq/posts/ai-cold-email-stack-salesforge-make/","image":"https://soph1yzzz.github.io/agentstack-hq/assets/covers/ai-cold-email-stack-salesforge-make.png"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does Salesforge cost in 2026?","acceptedAnswer":{"@type":"Answer","text":"Salesforge offers flat-rate tiers: Pro starts at $48/month (~$29–$40/mo billed annually) for 5,000 emails/month and 1,000 active contacts, while Growth is $96/month (~$58–$80/mo annual) for 50,000 emails/month, unlimited seats, unlimited mailboxes, ESP matching, and API/MCP access."}},{"@type":"Question","name":"Can I connect Salesforge to Make or n8n via API and webhooks?","acceptedAnswer":{"@type":"Answer","text":"Yes. Salesforge provides a public API and event webhooks (such as email_sent, reply_received, and email_bounced) that integrate directly with n8n and Make for automated lead enrollment, CRM logging, Slack alerts, and bounce suppression."}},{"@type":"Question","name":"How many cold emails should I send per mailbox per day in 2026?","acceptedAnswer":{"@type":"Answer","text":"Keep daily volume modest—typically 30 to 50 emails per warmed mailbox per day—and scale total volume horizontally across multiple secondary domains and mailboxes rather than hammering a single inbox."}},{"@type":"Question","name":"Why shouldn't I send cold outreach from a raw VPS or my main app domain?","acceptedAnswer":{"@type":"Answer","text":"Cold outbound carries higher complaint and bounce risk than transactional email. Sending from your primary domain can put password resets and customer invoices into spam, while raw VPS IPs lack warm reputation and ESP matching."}}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="logo" href="https://soph1yzzz.github.io/agentstack-hq/">Agent<span>Stack</span></a>
+      <nav class="nav-links">
+        <a href="https://soph1yzzz.github.io/agentstack-hq/">Guides</a>
+        <a href="https://soph1yzzz.github.io/agentstack-hq/tools/">Recommended Stack</a>
+        <a href="https://soph1yzzz.github.io/agentstack-hq/rss.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    
+      <article>
+        <div class="meta">2026-11-27 &middot; AgentStack Research Desk</div>
+        <h1>The Automated B2B Outbound Stack in 2026: Engineering Salesforge, Make &amp; n8n for High Deliverability (Python API Included)</h1>
+        <div style="margin-bottom:18px;"><span class="tag">#python</span><span class="tag">#devops</span><span class="tag">#tutorial</span><span class="tag">#ai</span></div>
+        <img src="https://soph1yzzz.github.io/agentstack-hq/assets/covers/ai-cold-email-stack-salesforge-make.png" alt="The Automated B2B Outbound Stack in 2026: Engineering Salesforge, Make &amp; n8n for High Deliverability (Python API Included)" style="width:100%;border-radius:12px;border:1px solid var(--border);margin:14px 0 22px;" />
+        <div class="tldr-box"><strong>Key Takeaway:</strong> Pairing Salesforge ($48/mo Pro or $96/mo Growth with unlimited mailboxes, Warmforge warm-up, and ESP matching) with Make or self-hosted n8n webhooks lets you automate lead enrichment, validation, and bounce hygiene without burning your primary domain.</div>
+        <blockquote class="disclosure"><strong>Transparency note: Some links in this article are affiliate links. If you sign up through them, AgentStack may earn a commission at no extra cost to you. We only recommend tools we evaluate rigorously.</strong></blockquote>
+<h2 id="quick-verdict-tl-dr">Quick Verdict (TL;DR)</h2>
+<ul>
+<li><strong>Dedicated sending &amp; deliverability layer:</strong> <a href="https://soph1yzzz.github.io/agentstack-hq/go/salesforge/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Salesforge</a> gives you flat-rate pricing (<strong>$48/mo Pro</strong> for 5,000 emails/mo or <strong>$96/mo Growth</strong> for 50,000 emails/mo, unlimited seats &amp; mailboxes), built-in <strong>Warmforge</strong> warm-up, <strong>ESP matching</strong>, and public API/webhook/MCP access.</li>
+<li><strong>Visual enrichment &amp; routing layer:</strong> Connect <a href="https://soph1yzzz.github.io/agentstack-hq/go/make/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Make</a> (~$9–$12/mo Core) or <a href="https://soph1yzzz.github.io/agentstack-hq/go/n8n/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">n8n</a> (self-hosted on <a href="https://soph1yzzz.github.io/agentstack-hq/go/hostinger/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Hostinger VPS</a> for ~$6–$9/mo) to validate emails before enrollment and catch bounce/reply webhooks automatically.</li>
+<li><strong>Golden deliverability rule:</strong> Never send cold outbound from your main application domain or a raw VPS SMTP server—isolate sending on secondary domains with strict SPF/DKIM/DMARC and keep volume under 30–50 emails per inbox per day.</li>
+</ul>
+<p>Most developers who try to automate B2B outbound make the same costly mistake: they hook SendGrid, SES, or a self-hosted Postfix container directly to a Python script and torch their domain reputation in 48 hours.</p>
+<p>In 2026, high-reply outbound requires separating <strong>lead enrichment and workflow orchestration</strong> (Python / n8n / Make) from <strong>multi-inbox rotation, warm-up, and ESP matching</strong> (<a href="https://soph1yzzz.github.io/agentstack-hq/go/salesforge/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Salesforge</a>). Below is the exact production architecture, pricing math, and copy-paste Python webhook hygiene script.</p>
+<h2 id="side-by-side-comparison">Side-by-Side Comparison</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Stack Layer</th>
+<th>Recommended Tool</th>
+<th>2026 Pricing</th>
+<th>Key Technical Capability</th>
+<th>Why It Matters</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Outbound Engine &amp; Warm-up</strong></td>
+<td><strong><a href="https://soph1yzzz.github.io/agentstack-hq/go/salesforge/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Salesforge</a></strong></td>
+<td>Pro: <strong>$48/mo</strong> (5k emails) / Growth: <strong>$96/mo</strong> (50k emails)</td>
+<td>Unlimited mailboxes, Warmforge warm-up, ESP matching, Public API + Webhooks</td>
+<td>Protects inbox placement without per-seat fees</td>
+</tr>
+<tr>
+<td><strong>Visual Orchestration</strong></td>
+<td><strong><a href="https://soph1yzzz.github.io/agentstack-hq/go/make/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Make</a></strong></td>
+<td>Core: <strong>~$9–$12/mo</strong> (10k credits)</td>
+<td>Prebuilt CRM, Google Sheets &amp; HTTP webhook connectors</td>
+<td>Fastest no-code CRM + Slack sync</td>
+</tr>
+<tr>
+<td><strong>Self-Hosted Orchestration</strong></td>
+<td><strong><a href="https://soph1yzzz.github.io/agentstack-hq/go/n8n/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">n8n</a></strong> on <strong><a href="https://soph1yzzz.github.io/agentstack-hq/go/hostinger/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Hostinger VPS</a></strong></td>
+<td><strong>~$6.49–$8.79/mo</strong> flat VPS</td>
+<td>Unlimited executions, custom Python/JS nodes, local queues</td>
+<td>Zero per-step cost for heavy lead enrichment</td>
+</tr>
+<tr>
+<td><strong>AI SDR Add-on (Optional)</strong></td>
+<td><strong>Salesforge Agent Frank</strong></td>
+<td>From <strong>$499/mo</strong> (quarterly)</td>
+<td>Autonomous reply handling &amp; meeting booking</td>
+<td>Hands-off scaling once messaging converts</td>
+</tr>
+</tbody></table></div>
+<h2 id="why-esp-matching-mailbox-rotation-matter-in-2026">Why ESP Matching &amp; Mailbox Rotation Matter in 2026</h2>
+<p>Google Workspace and Microsoft 365 spam filters now score sender reputation at both the domain and inbox level. Sending 400 cold emails from a single inbox triggers instant promotions-tab or spam-folder placement.</p>
+<p><a href="https://soph1yzzz.github.io/agentstack-hq/go/salesforge/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Salesforge</a> solves this at the infrastructure layer:</p>
+<ol>
+<li><strong>Unlimited Connected Mailboxes:</strong> Instead of paying per-inbox SaaS seats, you spread 1,000 daily sends across 25–30 warmed mailboxes (~35 emails/inbox/day).</li>
+<li><strong>Automatic ESP Matching (Growth plan):</strong> Routes Google Workspace senders to Google recipients and Microsoft 365 senders to Outlook/Office 365 recipients, materially improving primary inbox placement.</li>
+<li><strong>Built-in Warmforge Warm-up:</strong> Continuously exchanges natural engagement signals across your mailboxes so sender reputation stays healthy while campaigns run.</li>
+<li><strong>Strict DNS Hygiene:</strong> Configure SPF, DKIM, and a monitoring DMARC record (<code>v=DMARC1; p=none;</code>) on every secondary outbound domain before sending a single live email.</li>
+</ol>
+<h2 id="the-4-stage-automated-outbound-pipeline">The 4-Stage Automated Outbound Pipeline</h2>
+<p>Here is how engineering and growth teams wire <strong>Python / Make / n8n</strong> into <strong>Salesforge</strong> cleanly:</p>
+<ol>
+<li><strong>Enrich &amp; Deduplicate:</strong> Pull target accounts (Apollo, Apify, or your own scraper) into <a href="https://soph1yzzz.github.io/agentstack-hq/go/n8n/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">n8n</a> or <a href="https://soph1yzzz.github.io/agentstack-hq/go/make/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Make</a>, stripping duplicates and existing customers.</li>
+<li><strong>Hard-Gate Email Verification:</strong> Verify every address before touching your outbound sequence. Keep hard bounce rates strictly <strong>below 1–2%</strong>—bounces are the fastest way to burn a domain.</li>
+<li><strong>Programmatic Enrollment via API:</strong> Push validated contacts with personalized variables (<code>company_stack</code>, <code>recent_trigger</code>) into a Salesforge sequence via REST API.</li>
+<li><strong>Event-Driven Webhook Hygiene:</strong> Subscribe to Salesforge webhooks (<code>reply_received</code>, <code>email_bounced</code>, <code>unsubscribed</code>) so positive replies alert Slack immediately and bounces/unsubscribes are suppressed across your entire master database.</li>
+</ol>
+<h2 id="copy-paste-python-script-pre-flight-dns-check-salesforge-webhook-hygiene">Copy-Paste Python Script: Pre-Flight DNS Check + Salesforge Webhook Hygiene</h2>
+<p>Before enrolling leads or listening to campaign events, run a lightweight Python FastAPI webhook receiver (hostable alongside n8n on <a href="https://soph1yzzz.github.io/agentstack-hq/go/hostinger/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Hostinger VPS</a>) to enforce automatic bounce suppression and Slack notifications:</p>
+<pre><code class="lang-python">import os
+import json
+import urllib.request
+from fastapi import FastAPI, Header, HTTPException
+from pydantic import BaseModel
+
+app = FastAPI()
+WEBHOOK_TOKEN = os.environ.get(&quot;OUTBOUND_WEBHOOK_TOKEN&quot;, &quot;replace-me&quot;)
+SLACK_WEBHOOK_URL = os.environ.get(&quot;SLACK_WEBHOOK_URL&quot;, &quot;&quot;)
+SUPPRESSION_FILE = &quot;suppression_list.jsonl&quot;
+
+
+class SalesforgeEvent(BaseModel):
+    event_type: str  # email_sent | reply_received | email_bounced | unsubscribed
+    lead_email: str
+    campaign_id: str
+    snippet: str = &quot;&quot;
+
+
+def _notify_slack(text: str) -&gt; None:
+    if not SLACK_WEBHOOK_URL:
+        return
+    req = urllib.request.Request(
+        SLACK_WEBHOOK_URL,
+        data=json.dumps({&quot;text&quot;: text}).encode(&quot;utf-8&quot;),
+        headers={&quot;Content-Type&quot;: &quot;application/json&quot;},
+        method=&quot;POST&quot;,
+    )
+    urllib.request.urlopen(req, timeout=5).read()
+
+
+@app.post(&quot;/webhooks/salesforge&quot;)
+async def handle_outbound_event(
+    event: SalesforgeEvent,
+    x_webhook_token: str = Header(default=&quot;&quot;),
+):
+    if x_webhook_token != WEBHOOK_TOKEN:
+        raise HTTPException(status_code=401, detail=&quot;Unauthorized webhook&quot;)
+
+    if event.event_type in {&quot;email_bounced&quot;, &quot;unsubscribed&quot;}:
+        with open(SUPPRESSION_FILE, &quot;a&quot;, encoding=&quot;utf-8&quot;) as f:
+            f.write(json.dumps({&quot;email&quot;: event.lead_email.lower(), &quot;reason&quot;: event.event_type}) + &quot;\n&quot;)
+        return {&quot;status&quot;: &quot;suppressed&quot;, &quot;email&quot;: event.lead_email}
+
+    if event.event_type == &quot;reply_received&quot;:
+        _notify_slack(
+            f&quot;:dart: Positive reply from *{event.lead_email}* (campaign `{event.campaign_id}`):\n&gt; {event.snippet[:240]}&quot;
+        )
+        return {&quot;status&quot;: &quot;notified&quot;}
+
+    return {&quot;status&quot;: &quot;ignored&quot;, &quot;event_type&quot;: event.event_type}</code></pre>
+<p>Pair this receiver with a pre-enrollment check in <a href="https://soph1yzzz.github.io/agentstack-hq/go/make/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Make</a> or <a href="https://soph1yzzz.github.io/agentstack-hq/go/n8n/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">n8n</a> that skips any email present in <code>suppression_list.jsonl</code>—guaranteeing you never accidentally re-email a bounced address or opt-out across future campaigns.</p>
+<h2 id="real-2026-monthly-cost-math-10-000-personalized-emails-month">Real 2026 Monthly Cost Math (10,000 Personalized Emails/Month)</h2>
+<ul>
+<li><strong><a href="https://soph1yzzz.github.io/agentstack-hq/go/salesforge/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Salesforge</a> Growth ($96/mo monthly or ~$58–$80/mo annual):</strong> Covers up to 50,000 emails/month, 10,000 active contacts, unlimited mailboxes, unlimited seats, Warmforge warm-up, ESP matching, and full API/webhook access.</li>
+<li><strong>Orchestration Layer:</strong></li>
+<li>Self-hosted <a href="https://soph1yzzz.github.io/agentstack-hq/go/n8n/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">n8n</a> on <a href="https://soph1yzzz.github.io/agentstack-hq/go/hostinger/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Hostinger VPS</a>: <strong>~$8.79/mo flat</strong>.</li>
+<li>Or <a href="https://soph1yzzz.github.io/agentstack-hq/go/make/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Make</a> Core: <strong>~$9–$12/mo</strong>.</li>
+<li><strong>Total Software Stack:</strong> Roughly <strong>$70–$110/month</strong> (excluding raw domain/mailbox hosting) to operate an enterprise-grade multi-inbox outbound system with automated CRM syncing.</li>
+</ul>
+<h2 id="who-should-choose-what">Who Should Choose What?</h2>
+<ul>
+<li><strong>Choose <a href="https://soph1yzzz.github.io/agentstack-hq/go/salesforge/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Salesforge</a> (Pro at $48/mo or Growth at $96/mo)</strong> as your core sending, warm-up, and multi-inbox deliverability engine—especially if you want unlimited mailboxes without per-seat pricing.</li>
+<li><strong>Pair it with <a href="https://soph1yzzz.github.io/agentstack-hq/go/make/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Make</a></strong> if your sales ops team wants quick visual connections into HubSpot, Pipedrive, Google Sheets, and Slack.</li>
+<li><strong>Pair it with self-hosted <a href="https://soph1yzzz.github.io/agentstack-hq/go/n8n/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">n8n</a> on <a href="https://soph1yzzz.github.io/agentstack-hq/go/hostinger/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Hostinger VPS</a></strong> if you run heavy multi-step lead scraping, LLM personalization, and custom Python webhook hygiene at high volume.</li>
+</ul>
+<h2 id="recommended-tools-mentioned-in-this-guide">Recommended Tools Mentioned in This Guide</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Tool</th>
+<th>Starting Price</th>
+<th>Best For</th>
+<th>Official Link</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Salesforge</strong></td>
+<td>$48/mo</td>
+<td>Multi-inbox AI cold email personalization and deliverability infrastructure</td>
+<td><a href="https://soph1yzzz.github.io/agentstack-hq/go/salesforge/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Explore Salesforge</a></td>
+</tr>
+<tr>
+<td><strong>Make (formerly Integromat)</strong></td>
+<td>Free / $9/mo</td>
+<td>Visual multi-step AI workflows with lower cost per operation than Zapier</td>
+<td><a href="https://soph1yzzz.github.io/agentstack-hq/go/make/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Try Make Free</a></td>
+</tr>
+<tr>
+<td><strong>n8n Cloud</strong></td>
+<td>Self-hosted Free / €20/mo Cloud</td>
+<td>Developers building custom LangChain &amp; AI agent pipelines with full code control</td>
+<td><a href="https://soph1yzzz.github.io/agentstack-hq/go/n8n/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Start with n8n</a></td>
+</tr>
+<tr>
+<td><strong>Hostinger VPS</strong></td>
+<td>$4.99/mo</td>
+<td>Low-cost KVM VPS for self-hosting n8n, Ollama, and autonomous AI agent workers</td>
+<td><a href="https://soph1yzzz.github.io/agentstack-hq/go/hostinger/?ref=ai-cold-email-stack-salesforge-make" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Get Hostinger VPS</a></td>
+</tr>
+</tbody></table></div>
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<h3 id="how-much-does-salesforge-cost-in-2026">How much does Salesforge cost in 2026?</h3>
+<p>Salesforge offers flat-rate tiers: Pro starts at $48/month (~$29–$40/mo billed annually) for 5,000 emails/month and 1,000 active contacts, while Growth is $96/month (~$58–$80/mo annual) for 50,000 emails/month, unlimited seats, unlimited mailboxes, ESP matching, and API/MCP access.</p>
+<h3 id="can-i-connect-salesforge-to-make-or-n8n-via-api-and-webhooks">Can I connect Salesforge to Make or n8n via API and webhooks?</h3>
+<p>Yes. Salesforge provides a public API and event webhooks (such as email_sent, reply_received, and email_bounced) that integrate directly with n8n and Make for automated lead enrollment, CRM logging, Slack alerts, and bounce suppression.</p>
+<h3 id="how-many-cold-emails-should-i-send-per-mailbox-per-day-in-2026">How many cold emails should I send per mailbox per day in 2026?</h3>
+<p>Keep daily volume modest—typically 30 to 50 emails per warmed mailbox per day—and scale total volume horizontally across multiple secondary domains and mailboxes rather than hammering a single inbox.</p>
+<h3 id="why-shouldn-t-i-send-cold-outreach-from-a-raw-vps-or-my-main-app-domain">Why shouldn&#39;t I send cold outreach from a raw VPS or my main app domain?</h3>
+<p>Cold outbound carries higher complaint and bounce risk than transactional email. Sending from your primary domain can put password resets and customer invoices into spam, while raw VPS IPs lack warm reputation and ESP matching.</p>
+      </article>
+    
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><strong>AgentStack</strong> — Independent Benchmarks, Comparisons &amp; Blueprints for AI Agents and Workflow Automation</p>
+      <p>Transparency note: Some links in this article are affiliate links. If you sign up through them, AgentStack may earn a commission at no extra cost to you. We only recommend tools we evaluate rigorously.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /go/
+Sitemap: https://soph1yzzz.github.io/agentstack-hq/sitemap.xml

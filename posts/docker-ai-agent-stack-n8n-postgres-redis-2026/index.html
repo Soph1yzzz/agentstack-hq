@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Production Docker Compose Stack for Autonomous AI Agents: n8n Queue Mode + PostgreSQL + Redis + Caddy (2026 Guide) | AgentStack</title>
+  <meta name="description" content="Scale self-hosted AI agent workflows in 2026 using n8n Queue Mode with Docker Compose, PostgreSQL 16, Redis 7.2, horizontally scalable workers, and Caddy HTTPS." />
+  <meta name="google-site-verification" content="OZG-oKcAh8Z1gOLSFiWvTeQg201us2WYifoJXy2IB4g" />
+  <meta name="p:domain_verify" content="4046b44add9410f9e58d8dd613a6b487" />
+  <link rel="canonical" href="https://soph1yzzz.github.io/agentstack-hq/posts/docker-ai-agent-stack-n8n-postgres-redis-2026/" />
+  <link rel="alternate" type="application/rss+xml" title="AgentStack RSS" href="https://soph1yzzz.github.io/agentstack-hq/rss.xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Production Docker Compose Stack for Autonomous AI Agents: n8n Queue Mode + PostgreSQL + Redis + Caddy (2026 Guide) | AgentStack" />
+  <meta property="og:description" content="Scale self-hosted AI agent workflows in 2026 using n8n Queue Mode with Docker Compose, PostgreSQL 16, Redis 7.2, horizontally scalable workers, and Caddy HTTPS." />
+  <meta property="og:url" content="https://soph1yzzz.github.io/agentstack-hq/posts/docker-ai-agent-stack-n8n-postgres-redis-2026/" />
+  <meta property="og:image" content="https://soph1yzzz.github.io/agentstack-hq/assets/covers/docker-ai-agent-stack-n8n-postgres-redis-2026.png" />
+  <meta name="twitter:image" content="https://soph1yzzz.github.io/agentstack-hq/assets/covers/docker-ai-agent-stack-n8n-postgres-redis-2026.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+:root {
+  --bg: #0b1020;
+  --surface: #121a2e;
+  --surface-2: #18233d;
+  --text: #e6edf7;
+  --muted: #9aa8c7;
+  --accent: #38bdf8;
+  --accent-2: #34d399;
+  --border: #243252;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.72;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+header.site-header {
+  border-bottom: 1px solid var(--border);
+  background: rgba(11,16,32,0.92);
+  position: sticky; top: 0; backdrop-filter: blur(8px); z-index: 10;
+}
+.nav { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+.logo { font-weight: 800; font-size: 1.2rem; color: #fff; letter-spacing: -0.02em; }
+.logo span { color: var(--accent-2); }
+.nav-links a { margin-left: 20px; color: var(--muted); font-weight: 500; font-size: 0.95rem; }
+.nav-links a:hover { color: #fff; }
+.hero { padding: 56px 0 36px; border-bottom: 1px solid var(--border); }
+.hero h1 { font-size: 2.3rem; line-height: 1.2; margin: 0 0 12px; letter-spacing: -0.02em; }
+.hero p { color: var(--muted); font-size: 1.1rem; max-width: 680px; margin: 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin: 28px 0; }
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 22px; display: flex; flex-direction: column; justify-content: space-between;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.card h3 { margin: 0 0 10px; font-size: 1.15rem; line-height: 1.35; }
+.card p { color: var(--muted); font-size: 0.95rem; margin: 0 0 14px; }
+.meta { font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
+.tag {
+  display: inline-block; font-size: 0.75rem; padding: 2px 8px; border-radius: 999px;
+  background: var(--surface-2); color: var(--accent); margin-right: 6px; border: 1px solid var(--border);
+}
+.btn {
+  display: inline-block; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #06101f !important; font-weight: 700; padding: 9px 16px; border-radius: 8px;
+  font-size: 0.9rem; text-decoration: none !important;
+}
+.btn:hover { opacity: 0.92; }
+article { padding: 36px 0 60px; }
+article h1 { font-size: 2.2rem; line-height: 1.22; margin: 10px 0 16px; }
+article h2 { margin-top: 40px; padding-bottom: 8px; border-bottom: 1px solid var(--border); font-size: 1.5rem; }
+article h3 { margin-top: 26px; font-size: 1.18rem; color: #fff; }
+.tldr-box {
+  background: var(--surface-2); border-left: 4px solid var(--accent-2);
+  padding: 16px 20px; border-radius: 8px; margin: 20px 0 28px;
+}
+.tldr-box strong { color: var(--accent-2); }
+blockquote.disclosure {
+  background: rgba(56,189,248,0.08); border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px 16px; margin: 0 0 24px; font-size: 0.88rem; color: var(--muted);
+}
+.table-wrap { overflow-x: auto; margin: 24px 0; border-radius: 10px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 0.93rem; }
+th, td { padding: 12px 14px; border-bottom: 1px solid var(--border); text-align: left; }
+th { background: var(--surface-2); color: #fff; font-weight: 700; }
+tr:last-child td { border-bottom: none; }
+pre { background: #070b15; border: 1px solid var(--border); border-radius: 10px; padding: 16px; overflow-x: auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em; }
+p code, li code { background: var(--surface-2); padding: 2px 6px; border-radius: 4px; color: var(--accent-2); }
+.aff-link { color: var(--accent-2); font-weight: 600; }
+footer.site-footer {
+  border-top: 1px solid var(--border); padding: 32px 0; color: var(--muted); font-size: 0.88rem; margin-top: 48px;
+}
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Production Docker Compose Stack for Autonomous AI Agents: n8n Queue Mode + PostgreSQL + Redis + Caddy (2026 Guide)","description":"Scale self-hosted AI agent workflows in 2026 using n8n Queue Mode with Docker Compose, PostgreSQL 16, Redis 7.2, horizontally scalable workers, and Caddy HTTPS.","datePublished":"2026-11-28","author":{"@type":"Organization","name":"AgentStack Research Desk"},"publisher":{"@type":"Organization","name":"AgentStack"},"mainEntityOfPage":"https://soph1yzzz.github.io/agentstack-hq/posts/docker-ai-agent-stack-n8n-postgres-redis-2026/","image":"https://soph1yzzz.github.io/agentstack-hq/assets/covers/docker-ai-agent-stack-n8n-postgres-redis-2026.png"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When should I upgrade self-hosted n8n from single-container to Queue Mode?","acceptedAnswer":{"@type":"Answer","text":"Switch to Queue Mode as soon as you run concurrent AI agent webhooks, scheduled cron jobs that overlap, or heavy LLM loops that make the n8n web editor laggy or cause webhook timeouts."}},{"@type":"Question","name":"How much RAM do I need for n8n Queue Mode with PostgreSQL and Redis?","acceptedAnswer":{"@type":"Answer","text":"An 8 GB RAM KVM VPS (such as Hostinger KVM 2) is the comfortable production sweet spot: ~1.5 GB for PostgreSQL, ~512 MB for Redis, ~1.5 GB for n8n-main, and 1.5 GB each for 2 n8n-worker replicas."}},{"@type":"Question","name":"Why did `docker compose up --scale n8n-worker=3` fail in my setup?","acceptedAnswer":{"@type":"Answer","text":"Most failures happen because `container_name:` is hardcoded on the `n8n-worker` service in `docker-compose.yml`. Removing `container_name` lets Docker Compose assign unique names to each worker replica."}},{"@type":"Question","name":"Do all n8n workers need the same N8N_ENCRYPTION_KEY?","acceptedAnswer":{"@type":"Answer","text":"Yes. Both `n8n-main` and every `n8n-worker` replica must receive the exact same `N8N_ENCRYPTION_KEY` environment variable so workers can decrypt stored API credentials from PostgreSQL."}}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="logo" href="https://soph1yzzz.github.io/agentstack-hq/">Agent<span>Stack</span></a>
+      <nav class="nav-links">
+        <a href="https://soph1yzzz.github.io/agentstack-hq/">Guides</a>
+        <a href="https://soph1yzzz.github.io/agentstack-hq/tools/">Recommended Stack</a>
+        <a href="https://soph1yzzz.github.io/agentstack-hq/rss.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    
+      <article>
+        <div class="meta">2026-11-28 &middot; AgentStack Research Desk</div>
+        <h1>Production Docker Compose Stack for Autonomous AI Agents: n8n Queue Mode + PostgreSQL + Redis + Caddy (2026 Guide)</h1>
+        <div style="margin-bottom:18px;"><span class="tag">#docker</span><span class="tag">#devops</span><span class="tag">#ai</span><span class="tag">#tutorial</span></div>
+        <img src="https://soph1yzzz.github.io/agentstack-hq/assets/covers/docker-ai-agent-stack-n8n-postgres-redis-2026.png" alt="Production Docker Compose Stack for Autonomous AI Agents: n8n Queue Mode + PostgreSQL + Redis + Caddy (2026 Guide)" style="width:100%;border-radius:12px;border:1px solid var(--border);margin:14px 0 22px;" />
+        <div class="tldr-box"><strong>Key Takeaway:</strong> Switching self-hosted n8n from single-instance mode to Docker Compose Queue Mode (n8n-main + Redis 7.2 + PostgreSQL 16 + scalable workers) decouples webhook ingestion from heavy LLM tool calls so concurrent AI agents never freeze your UI or drop webhooks.</div>
+        <blockquote class="disclosure"><strong>Transparency note: Some links in this article are affiliate links. If you sign up through them, AgentStack may earn a commission at no extra cost to you. We only recommend tools we evaluate rigorously.</strong></blockquote>
+<h2 id="quick-verdict-tl-dr">Quick Verdict (TL;DR)</h2>
+<ul>
+<li><strong>Why Queue Mode matters for AI agents:</strong> Single-container <a href="https://soph1yzzz.github.io/agentstack-hq/go/n8n/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">n8n</a> handles webhook ingestion, UI rendering, and LLM execution inside one Node.js process. When 10 parallel AI agent runs spike RAM, webhooks time out. <strong>Queue Mode (<code>EXECUTIONS_MODE=queue</code>)</strong> offloads execution to isolated Redis-backed worker containers.</li>
+<li><strong>Best flat-rate host for this 5-container stack:</strong> A 2 vCPU / 8 GB RAM KVM VPS such as <a href="https://soph1yzzz.github.io/agentstack-hq/go/hostinger/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Hostinger VPS</a> (KVM 2 around $8.79/mo promo) runs <code>n8n-main</code>, 2–3 <code>n8n-worker</code> replicas, PostgreSQL 16, Redis 7.2, and Caddy with zero per-execution charges.</li>
+<li><strong>Managed alternative:</strong> If you prefer Git-push PaaS over Docker Compose ops, <a href="https://soph1yzzz.github.io/agentstack-hq/go/railway/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Railway</a> supports multi-service Redis + Postgres templates, though 24/7 metered RAM/CPU typically scales to $30–$65+/mo for multi-worker setups.</li>
+</ul>
+<p>If you already deployed a single-container n8n server and started seeing slow editor loads or 504 webhook timeouts during bursty AI agent runs, you have outgrown single-process execution.</p>
+<p>Below is the exact <strong>2026 production Docker Compose Queue Mode stack</strong>—including the <code>container_name</code> scaling trap most GitHub gists get wrong, memory guardrails, and horizontal worker scaling.</p>
+<h2 id="side-by-side-comparison">Side-by-Side Comparison</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Architecture</th>
+<th>Concurrent AI Agents</th>
+<th>Webhook Reliability Under Load</th>
+<th>Monthly Cost (24/7)</th>
+<th>Horizontal Worker Scaling</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Single-Container n8n + SQLite</strong></td>
+<td>Low (write locks)</td>
+<td>Drops webhooks during heavy loops</td>
+<td>~$5–$6/mo VPS</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>n8n Queue Mode + Postgres + Redis on <a href="https://soph1yzzz.github.io/agentstack-hq/go/hostinger/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Hostinger VPS</a></strong></td>
+<td>High (multi-worker)</td>
+<td><strong>High</strong> (main node only ingests webhooks)</td>
+<td><strong>~$8.79/mo</strong> (KVM 2)</td>
+<td>Yes (<code>--scale n8n-worker=3</code>)</td>
+</tr>
+<tr>
+<td><strong>Multi-Service Queue Stack on <a href="https://soph1yzzz.github.io/agentstack-hq/go/railway/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Railway</a></strong></td>
+<td>High (managed)</td>
+<td><strong>High</strong></td>
+<td>~$30–$65+/mo (metered)</td>
+<td>Yes (dashboard replicas)</td>
+</tr>
+<tr>
+<td><strong><a href="https://soph1yzzz.github.io/agentstack-hq/go/n8n/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">n8n</a> Cloud Pro</strong></td>
+<td>Managed tiers</td>
+<td><strong>High</strong></td>
+<td>~€50/mo (10k executions)</td>
+<td>Managed by n8n</td>
+</tr>
+</tbody></table></div>
+<h2 id="how-queue-mode-architecture-works">How Queue Mode Architecture Works</h2>
+<p>In Queue Mode, responsibilities split cleanly across four layers:</p>
+<ol>
+<li><strong><code>caddy</code></strong> terminates TLS (automatic Let&#39;s Encrypt HTTPS) and proxies traffic strictly to internal <code>n8n-main:5678</code>.</li>
+<li><strong><code>n8n-main</code></strong> serves the web editor, schedules cron triggers, and receives inbound webhooks—then immediately enqueues jobs into <strong>Redis</strong> without blocking.</li>
+<li><strong><code>redis</code> (Bull queue)</strong> buffers pending workflow executions so traffic spikes never overwhelm your server.</li>
+<li><strong><code>n8n-worker</code> (1 to N replicas)</strong> pulls jobs from Redis, executes LLM/API nodes in parallel, and writes state to <strong>PostgreSQL 16</strong>.</li>
+</ol>
+<h2 id="step-1-production-env-file">Step 1: Production <code>.env</code> File</h2>
+<p>Create <code>/opt/n8n-queue/.env</code> (<code>chmod 600 .env</code>). Both <code>n8n-main</code> and every <code>n8n-worker</code> <strong>must share the exact same <code>N8N_ENCRYPTION_KEY</code></strong>:</p>
+<pre><code class="lang-env">DOMAIN_NAME=agents.yourdomain.com
+SSL_EMAIL=ops@yourdomain.com
+TIMEZONE=UTC
+
+# Generate with: openssl rand -hex 32
+N8N_ENCRYPTION_KEY=replace_with_64_char_hex_encryption_key
+N8N_USER_MANAGEMENT_JWT_SECRET=replace_with_64_char_hex_jwt_secret
+
+DB_POSTGRESDB_DATABASE=n8n
+DB_POSTGRESDB_USER=n8n_user
+DB_POSTGRESDB_PASSWORD=ReplaceWithStrongPostgresPass2026!
+
+QUEUE_BULL_REDIS_PASSWORD=ReplaceWithStrongRedisPass2026!</code></pre>
+<h2 id="step-2-scalable-docker-compose-yml-with-scaling-trap-fixed">Step 2: Scalable <code>docker-compose.yml</code> (With Scaling Trap Fixed)</h2>
+<p>Notice two critical production details below:</p>
+<ul>
+<li><strong>No <code>container_name:</code> on <code>n8n-worker</code>:</strong> Many tutorials hardcode <code>container_name: n8n-worker</code>, which crashes the moment you run <code>docker compose up -d --scale n8n-worker=3</code>.</li>
+<li><strong>Explicit <code>mem_limit</code> caps:</strong> Guarantees a runaway LLM JSON loop inside a worker cannot OOM-kill PostgreSQL or Redis.</li>
+</ul>
+<pre><code class="lang-yaml">volumes:
+  postgres_storage:
+  redis_storage:
+  n8n_storage:
+  caddy_data:
+  caddy_config:
+
+networks:
+  n8n-net:
+    driver: bridge
+
+x-n8n-env: &amp;n8n-env
+  N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+  N8N_USER_MANAGEMENT_JWT_SECRET: ${N8N_USER_MANAGEMENT_JWT_SECRET}
+  DB_TYPE: postgresdb
+  DB_POSTGRESDB_HOST: postgres
+  DB_POSTGRESDB_PORT: 5432
+  DB_POSTGRESDB_DATABASE: ${DB_POSTGRESDB_DATABASE}
+  DB_POSTGRESDB_USER: ${DB_POSTGRESDB_USER}
+  DB_POSTGRESDB_PASSWORD: ${DB_POSTGRESDB_PASSWORD}
+  QUEUE_BULL_REDIS_HOST: redis
+  QUEUE_BULL_REDIS_PORT: 6379
+  QUEUE_BULL_REDIS_PASSWORD: ${QUEUE_BULL_REDIS_PASSWORD}
+  EXECUTIONS_MODE: queue
+  OFFLOAD_MANUAL_EXECUTIONS_TO_WORKERS: &quot;true&quot;
+  EXECUTIONS_DATA_PRUNE: &quot;true&quot;
+  EXECUTIONS_DATA_MAX_AGE: &quot;168&quot;
+  GENERIC_TIMEZONE: ${TIMEZONE}
+  NODE_ENV: production
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    mem_limit: 1536m
+    environment:
+      POSTGRES_DB: ${DB_POSTGRESDB_DATABASE}
+      POSTGRES_USER: ${DB_POSTGRESDB_USER}
+      POSTGRES_PASSWORD: ${DB_POSTGRESDB_PASSWORD}
+    volumes:
+      - postgres_storage:/var/lib/postgresql/data
+    networks:
+      - n8n-net
+    healthcheck:
+      test: [&quot;CMD-SHELL&quot;, &quot;pg_isready -U ${DB_POSTGRESDB_USER} -d ${DB_POSTGRESDB_DATABASE}&quot;]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7.2-alpine
+    restart: unless-stopped
+    mem_limit: 512m
+    command: redis-server --appendonly yes --requirepass ${QUEUE_BULL_REDIS_PASSWORD}
+    volumes:
+      - redis_storage:/data
+    networks:
+      - n8n-net
+    healthcheck:
+      test: [&quot;CMD&quot;, &quot;redis-cli&quot;, &quot;-a&quot;, &quot;${QUEUE_BULL_REDIS_PASSWORD}&quot;, &quot;ping&quot;]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  n8n-main:
+    image: docker.n8n.io/n8nio/n8n:latest
+    restart: unless-stopped
+    mem_limit: 1536m
+    environment:
+      &lt;&lt;: *n8n-env
+      N8N_HOST: ${DOMAIN_NAME}
+      WEBHOOK_URL: https://${DOMAIN_NAME}/
+    ports:
+      - &quot;127.0.0.1:5678:5678&quot;
+    volumes:
+      - n8n_storage:/home/node/.n8n
+    networks:
+      - n8n-net
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  n8n-worker:
+    image: docker.n8n.io/n8nio/n8n:latest
+    restart: unless-stopped
+    mem_limit: 1536m
+    command: worker --concurrency=10
+    environment:
+      &lt;&lt;: *n8n-env
+    volumes:
+      - n8n_storage:/home/node/.n8n
+    networks:
+      - n8n-net
+    depends_on:
+      n8n-main:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  caddy:
+    image: caddy:alpine
+    restart: unless-stopped
+    mem_limit: 256m
+    ports:
+      - &quot;80:80&quot;
+      - &quot;443:443&quot;
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - n8n-net
+    depends_on:
+      - n8n-main</code></pre>
+<h2 id="step-3-launch-scale-workers-horizontally">Step 3: Launch &amp; Scale Workers Horizontally</h2>
+<p>Pair this with a standard Caddy reverse proxy (<code>reverse_proxy n8n-main:5678</code> with <code>response_header_timeout 300s</code>), lock down UFW (<code>22</code>, <code>80</code>, <code>443</code> only), and launch two parallel workers immediately:</p>
+<pre><code class="lang-bash">docker compose up -d --scale n8n-worker=2
+docker compose ps</code></pre>
+<p>Verify Redis queue connectivity and live worker registration:</p>
+<pre><code class="lang-bash">docker compose logs --tail=30 n8n-worker</code></pre>
+<p>You should see <code>n8n worker is now ready</code> on both replicas. On an 8 GB RAM VPS (like <a href="https://soph1yzzz.github.io/agentstack-hq/go/hostinger/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Hostinger VPS</a> KVM 2), 2 workers at <code>--concurrency=10</code> comfortably process 20 concurrent AI agent workflows without slowing down the web UI.</p>
+<h2 id="practical-workload-separation-tip">Practical Workload Separation Tip</h2>
+<p>Keep your Docker Queue Mode stack dedicated to agent orchestration, RAG pipelines, and webhook processing. For reputation-sensitive workloads like high-volume B2B cold email outreach, hand off multi-inbox rotation and warm-up to a specialized platform like <a href="https://soph1yzzz.github.io/agentstack-hq/go/salesforge/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Salesforge</a> via API/webhook rather than trying to run SMTP mail servers on your automation VPS.</p>
+<h2 id="who-should-choose-what">Who Should Choose What?</h2>
+<ul>
+<li><strong>Choose Self-Hosted n8n Queue Mode on <a href="https://soph1yzzz.github.io/agentstack-hq/go/hostinger/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Hostinger VPS</a> (KVM 2)</strong> if you run concurrent webhooks, AI agents, or client automations and want predictable sub-$10/month flat hosting with horizontal worker scaling.</li>
+<li><strong>Choose <a href="https://soph1yzzz.github.io/agentstack-hq/go/railway/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Railway</a></strong> if you want managed multi-service Postgres + Redis + worker replicas without touching Ubuntu or Caddy.</li>
+<li><strong>Choose <a href="https://soph1yzzz.github.io/agentstack-hq/go/n8n/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">n8n</a> Cloud</strong> if your team prefers zero infrastructure ownership and stays within managed execution tiers.</li>
+</ul>
+<h2 id="recommended-tools-mentioned-in-this-guide">Recommended Tools Mentioned in This Guide</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Tool</th>
+<th>Starting Price</th>
+<th>Best For</th>
+<th>Official Link</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Hostinger VPS</strong></td>
+<td>$4.99/mo</td>
+<td>Low-cost KVM VPS for self-hosting n8n, Ollama, and autonomous AI agent workers</td>
+<td><a href="https://soph1yzzz.github.io/agentstack-hq/go/hostinger/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Get Hostinger VPS</a></td>
+</tr>
+<tr>
+<td><strong>n8n Cloud</strong></td>
+<td>Self-hosted Free / €20/mo Cloud</td>
+<td>Developers building custom LangChain &amp; AI agent pipelines with full code control</td>
+<td><a href="https://soph1yzzz.github.io/agentstack-hq/go/n8n/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Start with n8n</a></td>
+</tr>
+<tr>
+<td><strong>Railway</strong></td>
+<td>$5/mo usage-based</td>
+<td>Deploying Python AI agents, n8n instances, and APIs in under 60 seconds</td>
+<td><a href="https://soph1yzzz.github.io/agentstack-hq/go/railway/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Deploy on Railway</a></td>
+</tr>
+<tr>
+<td><strong>Salesforge</strong></td>
+<td>$48/mo</td>
+<td>Multi-inbox AI cold email personalization and deliverability infrastructure</td>
+<td><a href="https://soph1yzzz.github.io/agentstack-hq/go/salesforge/?ref=docker-ai-agent-stack-n8n-postgres-redis-2026" class="aff-link" rel="sponsored nofollow noopener" target="_blank">Explore Salesforge</a></td>
+</tr>
+</tbody></table></div>
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<h3 id="when-should-i-upgrade-self-hosted-n8n-from-single-container-to-queue-mode">When should I upgrade self-hosted n8n from single-container to Queue Mode?</h3>
+<p>Switch to Queue Mode as soon as you run concurrent AI agent webhooks, scheduled cron jobs that overlap, or heavy LLM loops that make the n8n web editor laggy or cause webhook timeouts.</p>
+<h3 id="how-much-ram-do-i-need-for-n8n-queue-mode-with-postgresql-and-redis">How much RAM do I need for n8n Queue Mode with PostgreSQL and Redis?</h3>
+<p>An 8 GB RAM KVM VPS (such as Hostinger KVM 2) is the comfortable production sweet spot: ~1.5 GB for PostgreSQL, ~512 MB for Redis, ~1.5 GB for n8n-main, and 1.5 GB each for 2 n8n-worker replicas.</p>
+<h3 id="why-did-docker-compose-up-scale-n8n-worker-3-fail-in-my-setup">Why did <code>docker compose up --scale n8n-worker=3</code> fail in my setup?</h3>
+<p>Most failures happen because <code>container_name:</code> is hardcoded on the <code>n8n-worker</code> service in <code>docker-compose.yml</code>. Removing <code>container_name</code> lets Docker Compose assign unique names to each worker replica.</p>
+<h3 id="do-all-n8n-workers-need-the-same-n8n-encryption-key">Do all n8n workers need the same N8N_ENCRYPTION_KEY?</h3>
+<p>Yes. Both <code>n8n-main</code> and every <code>n8n-worker</code> replica must receive the exact same <code>N8N_ENCRYPTION_KEY</code> environment variable so workers can decrypt stored API credentials from PostgreSQL.</p>
+      </article>
+    
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><strong>AgentStack</strong> — Independent Benchmarks, Comparisons &amp; Blueprints for AI Agents and Workflow Automation</p>
+      <p>Transparency note: Some links in this article are affiliate links. If you sign up through them, AgentStack may earn a commission at no extra cost to you. We only recommend tools we evaluate rigorously.</p>
+    </div>
+  </footer>
+</body>
+</html>
